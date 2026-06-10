@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import styles from "./App.module.css";
+import Game from "./components/game/Game";
 
 interface User {
   name: string;
@@ -212,7 +213,6 @@ function useUser() {
 function App() {
   //Zona de declaraciones estados, manejadores de eventos, hooks, efectos colaterales
   const [showList, setShowList] = useState(true);
-  const { user, updateUser } = useUser();
 
   const handleEventClick = (e) => {
     console.log("Event click:", e);
@@ -231,6 +231,8 @@ function App() {
 
   return (
     <>
+      <Game />
+      <hr style={{ width: "100%" }} />
       <Contador />
       <button onClick={handleEventClick} onDoubleClick={handleDoubleClick}>
         Actualizar usuario
