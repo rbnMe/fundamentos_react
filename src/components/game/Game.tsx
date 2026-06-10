@@ -2,6 +2,7 @@ import { useState } from "react";
 import InitialScreen from "./InitialScreen";
 import PlayingScreen from "./PlayingScreen";
 import GameOverScreen from "./GameOverScreen";
+import { sendScore } from "../../api/juego";
 
 function Game() {
   ///ESTADOS
@@ -19,6 +20,13 @@ function Game() {
   };
 
   const handleGameOver = () => {
+    sendScore(score)
+      .then(() => {
+        console.log("ENVIANDO SCORE");
+      })
+      .catch((e) => {
+        console.log("Error al enviar", e);
+      });
     setStatus("over");
   };
 
