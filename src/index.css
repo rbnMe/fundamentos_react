@@ -11,6 +11,12 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
+  /* Added tokens for the global theme (reuse these for coherence) */
+  --accent-2: #6d28d9; /* second stop for the purple gradient (CTA) */
+  --radius: 12px; /* cards/fieldset */
+  --radius-sm: 10px; /* buttons/inputs */
+  --radius-pill: 999px; /* pill controls */
+
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
@@ -117,4 +123,198 @@ code {
   border-radius: 4px;
   color: var(--accent);
   font-weight: 600;
+}
+
+/* ============================================================
+   Global theme — base styling for plain HTML elements.
+   Components with their own CSS Module class (.start, App's
+   .counter, etc.) keep winning thanks to class specificity.
+   ============================================================ */
+
+/* --- Layout breathing room --- */
+#center {
+  padding: 8px 24px 24px;
+}
+
+section {
+  margin-inline: auto;
+}
+
+/* --- Buttons (secondary by default) --- */
+button {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--text-h);
+  background: var(--accent-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 22px;
+  margin: 6px;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* #root is a flex column; keep standalone buttons from stretching full width */
+#root > button {
+  align-self: center;
+}
+
+/* --- Form controls --- */
+input,
+select,
+textarea {
+  font: inherit;
+  font-size: 16px;
+  color: var(--text-h);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text);
+  opacity: 0.6;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+/* --- Fieldset as a card + legend --- */
+fieldset {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 0;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+legend {
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-h);
+  letter-spacing: 0.2px;
+  padding: 0 8px;
+}
+
+/* --- Form layout --- */
+form {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  max-width: 420px;
+  width: 100%;
+  margin: 12px auto;
+  text-align: left;
+}
+
+form button {
+  align-self: center;
+}
+
+/* --- User list --- */
+ol {
+  list-style: none;
+  counter-reset: item;
+  margin: 16px auto;
+  padding: 0;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-h);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+ol li::before {
+  content: counter(item);
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-pill);
+}
+
+ol li:hover {
+  transform: translateX(2px);
+  box-shadow: var(--shadow);
+}
+
+/* --- Divider --- */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
 }

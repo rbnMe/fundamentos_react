@@ -1,4 +1,5 @@
 import useGame from "../../hooks/useGame";
+import styles from "./PlayingScreen.module.css";
 
 function PlayingScreen({
   score,
@@ -11,14 +12,19 @@ function PlayingScreen({
 }) {
   const { letter, timeLeft } = useGame({ score, onScoreChange, onGameOver });
   return (
-    <section>
-      <h1>Jugando</h1>
-      <h2>Tiempo restante: {timeLeft}</h2>
-      <p>Presiona la tecla que corresponde a la letra que ves</p>
-      <div>
-        <span>Letra: </span>
-        <span>{letter}</span>
+    <section className={styles.screen}>
+      <h1 className={styles.title}>Jugando</h1>
+      <h2 className={styles.timer}>
+        Tiempo restante
+        <span className={styles.timerValue}>{timeLeft}</span>
+      </h2>
+      <div className={styles.letterCard}>
+        <span className={styles.letterLabel}>Letra: </span>
+        <span className={styles.letter}>{letter}</span>
       </div>
+      <p className={styles.hint}>
+        Presiona la tecla que corresponde a la letra que ves
+      </p>
     </section>
   );
 }
